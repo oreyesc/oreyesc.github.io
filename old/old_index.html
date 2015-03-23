@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Slidify Presentation</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Slidify Presentation">
+  <meta name="author" content="Oscar Reyes">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="libraries/widgets/nvd3/css/nv.d3.css"></link>
+<link rel=stylesheet href="libraries/widgets/nvd3/css/rNVD3.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  <script src="libraries/widgets/nvd3/js/jquery-1.8.2.min.js"></script>
+<script src="libraries/widgets/nvd3/js/d3.v3.min.js"></script>
+<script src="libraries/widgets/nvd3/js/nv.d3.min-new.js"></script>
+<script src="libraries/widgets/nvd3/js/fisheye.js"></script>
+
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <aside class="gdbar">
+    <img src="assets/img//OR.jpg">
+  </aside>
+  <hgroup class="auto-fadein">
+    <h1>Slidify Presentation</h1>
+    <h2>Project using Slidify</h2>
+    <p>Oscar Reyes<br/>DS</p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Description</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>The application requirements:</p>
+
+<ol>
+<li>Some form of input (widget: textbox, radio button, checkbox, ...)</li>
+<li>Some operation on the ui input in sever.R</li>
+<li>Some reactive output displayed as a result of server calculations</li>
+<li>You must also include enough documentation so that a novice user could use your application.</li>
+<li>The documentation should be at the Shiny website itself. </li>
+</ol>
+
+<h2>Components</h2>
+
+<table>
+        <tr>
+                <td><b>Component</b></td>
+                <td><b>Description</b></td>
+        </tr>
+        <tr>
+                <td>ui.R</td>
+                <td>user-interface definition of a Shiny web application.</td>
+        </tr>
+        <tr>
+                <td>server.R</td>
+                <td>logic for a Shiny web application</td>
+        </tr>
+</table>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-2" style="background:;">
+  <hgroup>
+    <h2>Functionality ui.R</h2>
+  </hgroup>
+  <article data-timings="">
+    
+<div style='float:left;width:48%;' class='centered'>
+  <p>In the ui.R the user has tow parts:</p>
+
+<p><strong>1. Side Bar: has the option to choose:</strong></p>
+
+<ul>
+<li><strong>Select a dataset</strong>: iris, mtcars or trees.</li>
+<li><strong>Select two variables</strong>: X and Y variables.</li>
+<li><strong>Select density</strong>: from 50 to 250.</li>
+<li><strong>Select a colour</strong> for the graphs.</li>
+<li><strong>Select one type of graph</strong>:
+
+<ul>
+<li>Bar Plot.</li>
+<li>Box Plot.</li>
+<li>Dot Plot.</li>
+<li>Line Chart.</li>
+<li>Scatter Plot.</li>
+</ul></li>
+</ul>
+
+</div>
+<div style='float:right;width:48%;'>
+  <p><strong>2. mainPanel: has a tabPanel with:</strong></p>
+
+<ul>
+<li><strong>Dinamyc Plot</strong>: shows the selected graphic created with the information of the selected dataset.</li>
+<li><strong>Structure</strong>: shows the selected dataset structure.</li>
+<li><strong>Summary</strong>: shows the selected dataset summary.</li>
+<li><strong>Data</strong>: shows the dataof the X variable.</li>
+</ul>
+
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>Server and Libraries</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>In the server.R are:</p>
+
+<table>
+        <tr>
+                <td>**Variable**</td>
+                <td>**Functionality**</td>
+        </tr>
+        <tr>
+                <td>colm</td>
+                <td>contains the value of selected dataset</td>
+        </tr>
+        <tr>
+                <td>var</td>
+                <td>contains the names of the columns of the selected dataset.</td>
+        </tr>
+        <tr>
+                <td>dataset</td>
+                <td>contains the selected dataset.</td>
+        </tr>
+        <tr>
+                <td>graph</td>
+                <td>contains the selected graphic.</td>
+        </tr>
+</table>
+
+<h3>Libraries:</h3>
+
+<p><code>shiny</code> , <code>ggplot</code>, <code>car</code>, <code>RcppEigen</code></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Embedded Code</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">library(ggplot2)
+qplot(hp, mpg, data=mtcars)+geom_smooth() 
+</code></pre>
+
+<p><img src="assets/fig/md-cars-scatter-1.png" alt="plot of chunk md-cars-scatter"> 
+<a href="https://sigma360.shinyapps.io/shinyproject_coursera/">Shiny Application</a></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <article data-timings="">
+    <pre><code>## Loading required package: devtools
+</code></pre>
+
+<pre><code>## Warning: Username parameter is deprecated. Please use ramnathv/slidify
+</code></pre>
+
+<pre><code>## Warning: Username parameter is deprecated. Please use
+## ramnathv/slidifyLibraries
+</code></pre>
+
+<pre><code>## Downloading github repo ramnathv/slidify@dev
+## Installing slidify
+## &#39;/Library/Frameworks/R.framework/Resources/bin/R&#39; --vanilla CMD INSTALL  \
+##   &#39;/private/var/folders/pd/q5qm6hcx3tl3vhk9qx1vz6lw0000gn/T/Rtmp3pol39/devtools845e3476e0da/ramnathv-slidify-1e11ccf&#39;  \
+##   --library=&#39;/Library/Frameworks/R.framework/Versions/3.1/Resources/library&#39;  \
+##   --install-tests 
+## 
+## Downloading github repo ramnathv/slidifyLibraries@dev
+## Installing slidifyLibraries
+## &#39;/Library/Frameworks/R.framework/Resources/bin/R&#39; --vanilla CMD INSTALL  \
+##   &#39;/private/var/folders/pd/q5qm6hcx3tl3vhk9qx1vz6lw0000gn/T/Rtmp3pol39/devtools845e6ffdbc3d/ramnathv-slidifyLibraries-b6bad77&#39;  \
+##   --library=&#39;/Library/Frameworks/R.framework/Versions/3.1/Resources/library&#39;  \
+##   --install-tests
+</code></pre>
+
+<pre><code>## Warning: Username parameter is deprecated. Please use ramnathv/rCharts
+</code></pre>
+
+<pre><code>## Downloading github repo ramnathv/rCharts@master
+## Installing rCharts
+## &#39;/Library/Frameworks/R.framework/Resources/bin/R&#39; --vanilla CMD INSTALL  \
+##   &#39;/private/var/folders/pd/q5qm6hcx3tl3vhk9qx1vz6lw0000gn/T/Rtmp3pol39/devtools845e243d2ebd/ramnathv-rCharts-389e214&#39;  \
+##   --library=&#39;/Library/Frameworks/R.framework/Versions/3.1/Resources/library&#39;  \
+##   --install-tests
+</code></pre>
+
+<pre><code>## Warning: Username parameter is deprecated. Please use rstudio/shiny
+</code></pre>
+
+<pre><code>## Downloading github repo rstudio/shiny@master
+## Installing shiny
+## Installing dependencies for shiny:
+## jsonlite
+</code></pre>
+
+<pre><code>## Error in contrib.url(repos, &quot;source&quot;): trying to use CRAN without setting a mirror
+</code></pre>
+
+<pre><code>## Loading required package: rCharts
+</code></pre>
+
+<div id = 'chart1' class = 'rChart nvd3'></div>
+
+<script type='text/javascript'>
+ $(document).ready(function(){
+      drawchart1()
+    });
+    function drawchart1(){  
+      var opts = {
+ "dom": "chart1",
+"width":    800,
+"height":    400,
+"x": "Hair",
+"y": "Freq",
+"group": "Eye",
+"type": "multiBarChart",
+"id": "chart1" 
+},
+        data = [
+ {
+ "Hair": "Black",
+"Eye": "Brown",
+"Sex": "Male",
+"Freq":             32 
+},
+{
+ "Hair": "Brown",
+"Eye": "Brown",
+"Sex": "Male",
+"Freq":             53 
+},
+{
+ "Hair": "Red",
+"Eye": "Brown",
+"Sex": "Male",
+"Freq":             10 
+},
+{
+ "Hair": "Blond",
+"Eye": "Brown",
+"Sex": "Male",
+"Freq":              3 
+},
+{
+ "Hair": "Black",
+"Eye": "Blue",
+"Sex": "Male",
+"Freq":             11 
+},
+{
+ "Hair": "Brown",
+"Eye": "Blue",
+"Sex": "Male",
+"Freq":             50 
+},
+{
+ "Hair": "Red",
+"Eye": "Blue",
+"Sex": "Male",
+"Freq":             10 
+},
+{
+ "Hair": "Blond",
+"Eye": "Blue",
+"Sex": "Male",
+"Freq":             30 
+},
+{
+ "Hair": "Black",
+"Eye": "Hazel",
+"Sex": "Male",
+"Freq":             10 
+},
+{
+ "Hair": "Brown",
+"Eye": "Hazel",
+"Sex": "Male",
+"Freq":             25 
+},
+{
+ "Hair": "Red",
+"Eye": "Hazel",
+"Sex": "Male",
+"Freq":              7 
+},
+{
+ "Hair": "Blond",
+"Eye": "Hazel",
+"Sex": "Male",
+"Freq":              5 
+},
+{
+ "Hair": "Black",
+"Eye": "Green",
+"Sex": "Male",
+"Freq":              3 
+},
+{
+ "Hair": "Brown",
+"Eye": "Green",
+"Sex": "Male",
+"Freq":             15 
+},
+{
+ "Hair": "Red",
+"Eye": "Green",
+"Sex": "Male",
+"Freq":              7 
+},
+{
+ "Hair": "Blond",
+"Eye": "Green",
+"Sex": "Male",
+"Freq":              8 
+} 
+]
+  
+      if(!(opts.type==="pieChart" || opts.type==="sparklinePlus" || opts.type==="bulletChart")) {
+        var data = d3.nest()
+          .key(function(d){
+            //return opts.group === undefined ? 'main' : d[opts.group]
+            //instead of main would think a better default is opts.x
+            return opts.group === undefined ? opts.y : d[opts.group];
+          })
+          .entries(data);
+      }
+      
+      if (opts.disabled != undefined){
+        data.map(function(d, i){
+          d.disabled = opts.disabled[i]
+        })
+      }
+      
+      nv.addGraph(function() {
+        var chart = nv.models[opts.type]()
+          .width(opts.width)
+          .height(opts.height)
+          
+        if (opts.type != "bulletChart"){
+          chart
+            .x(function(d) { return d[opts.x] })
+            .y(function(d) { return d[opts.y] })
+        }
+          
+         
+        
+          
+        
+
+        
+        
+        
+      
+       d3.select("#" + opts.id)
+        .append('svg')
+        .datum(data)
+        .transition().duration(500)
+        .call(chart);
+
+       nv.utils.windowResize(chart.update);
+       return chart;
+      });
+    };
+</script>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Description'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='Functionality ui.R'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Server and Libraries'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Embedded Code'>
+         4
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=5 title=''>
+         5
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>

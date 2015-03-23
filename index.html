@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Slidify Project</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Slidify Project">
+  <meta name="author" content="Oscar Reyes">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="libraries/widgets/interactive/css/aceeditor.css"></link>
+<link rel=stylesheet href="libraries/widgets/nvd3/css/nv.d3.css"></link>
+<link rel=stylesheet href="libraries/widgets/nvd3/css/rNVD3.css"></link>
+<link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  <script src="libraries/widgets/nvd3/js/jquery-1.8.2.min.js"></script>
+<script src="libraries/widgets/nvd3/js/d3.v3.min.js"></script>
+<script src="libraries/widgets/nvd3/js/nv.d3.min-new.js"></script>
+<script src="libraries/widgets/nvd3/js/fisheye.js"></script>
+
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <aside class="gdbar">
+    <img src="assets/img//OR.jpg">
+  </aside>
+  <hgroup class="auto-fadein">
+    <h1>Slidify Project</h1>
+    <h2>Slidify &amp; Shiny</h2>
+    <p>Oscar Reyes<br/>DS</p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <article data-timings="">
+    <style>
+body {
+  background-color: #000;
+}
+.quiz-option label{
+  display: inline;
+  font-size: 1em;
+}
+ul.nav li::before { content: ""; }  
+ul.nav li{ font-size: 18px; line-height: 24px;}
+</style>
+
+<h2>Description</h2>
+
+<p>The application requirements:</p>
+
+<ol>
+<li>Some form of input (widget: textbox, radio button, checkbox, ...)</li>
+<li>Some operation on the ui input in sever.R</li>
+<li>Some reactive output displayed as a result of server calculations</li>
+<li>You must also include enough documentation so that a novice user could use your application.</li>
+<li>The documentation should be at the Shiny website itself. </li>
+</ol>
+
+<h2>Components</h2>
+
+<table>
+        <tr>
+                <td><b>Component</b></td>
+                <td><b>Description</b></td>
+        </tr>
+        <tr>
+                <td>ui.R</td>
+                <td>user-interface definition of a Shiny web application.</td>
+        </tr>
+        <tr>
+                <td>server.R</td>
+                <td>logic for a Shiny web application</td>
+        </tr>
+</table>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-2" style="background:;">
+  <hgroup>
+    <h2>Functionality ui.R</h2>
+  </hgroup>
+  <article data-timings="">
+    
+<div style='float:left;width:48%;' class='centered'>
+  <p>In the ui.R the user has tow parts:</p>
+
+<p><strong>1. Side Bar: has the option to choose:</strong></p>
+
+<ul>
+<li><strong>Select a dataset</strong>: iris, mtcars or trees.</li>
+<li><strong>Select two variables</strong>: X and Y variables.</li>
+<li><strong>Select density</strong>: from 50 to 250.</li>
+<li><strong>Select a colour</strong> for the graphs.</li>
+<li><strong>Select one type of graph</strong>:
+
+<ul>
+<li>Bar Plot.</li>
+<li>Box Plot.</li>
+<li>Dot Plot.</li>
+<li>Line Chart.</li>
+<li>Scatter Plot.</li>
+</ul></li>
+</ul>
+
+</div>
+<div style='float:right;width:48%;'>
+  <p><strong>2. mainPanel: has a tabPanel with:</strong></p>
+
+<ul>
+<li><strong>Dinamyc Plot</strong>: shows the selected graphic created with the information of the selected dataset.</li>
+<li><strong>Structure</strong>: shows the selected dataset structure.</li>
+<li><strong>Summary</strong>: shows the selected dataset summary.</li>
+<li><strong>Data</strong>: shows the dataof the X variable.</li>
+</ul>
+
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>Server and Libraries</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>In the server.R are:</p>
+
+<table>
+        <tr>
+                <td>**Variable**</td>
+                <td>**Functionality**</td>
+        </tr>
+        <tr>
+                <td>colm</td>
+                <td>contains the value of selected dataset</td>
+        </tr>
+        <tr>
+                <td>var</td>
+                <td>contains the names of the columns of the selected dataset.</td>
+        </tr>
+        <tr>
+                <td>dataset</td>
+                <td>contains the selected dataset.</td>
+        </tr>
+        <tr>
+                <td>graph</td>
+                <td>contains the selected graphic.</td>
+        </tr>
+</table>
+
+<h3>Libraries:</h3>
+
+<p><code>shiny</code> , <code>ggplot</code>, <code>car</code>, <code>RcppEigen</code></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Embedded Code</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">library(ggplot2)
+qplot(hp, mpg, data=mtcars)+geom_smooth() 
+</code></pre>
+
+<p><img src="assets/fig/md-cars-scatter-1.png" alt="plot of chunk md-cars-scatter"> 
+<a href="https://sigma360.shinyapps.io/shinyproject_coursera/">Shiny Application</a></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-5" style="background:;">
+  <hgroup>
+    <h2>Interactive Chart</h2>
+  </hgroup>
+  <article data-timings="">
+     
+<div class='row-fluid'>
+  <div class='span5'>
+    <form id="knitForm5" data-cell="5">
+      <pre><code class="r">slidifyUI(
+        slidebarPanel (
+                selectInput (&#39;sex&#39;, &#39;Chose Sex&#39;, c (&#39;Male&#39;, &#39;Female&#39;)),
+                selectInput (&#39;type&#39;, &#39;Choose Type&#39;,
+                             c (&#39;multiBarChart&#39;, &#39;multiBarHorizantalChart&#39;)
+                )
+        ),
+        mainPanel (
+
+        )
+) 
+</code></pre>
+
+<pre><code>## Error in eval(expr, envir, enclos): could not find function &quot;slidifyUI&quot;
+</code></pre>
+
+      <div id='aceeditor5' style="height:px;"></div>
+      <div class='interactive btn-toolbar pull-left'>
+        <div class='btn-group'>
+          <a class='btn btn-small action-button' id='runCode5' data-action='runCode'
+            data-cell='5' rel='tooltip' data-title='Run Code'>
+            <i class='icon-play'></i>
+          </a>
+          <a class='btn btn-small iBtn' id='testCode5' data-action='testCode'
+             data-cell='5' rel='tooltip' data-title='Test Code'>
+            <i class='icon-check'></i>
+          </a>
+          <a class='btn btn-small iBtn' id='clearResult5' data-action='clearResult'
+             data-cell='5' rel='tooltip' data-title='Clear Output'>
+            <i class="icon-remove"></i>
+          </a>
+          <a class='btn  btn-small iBtn' id='getHint5' rel='tooltip' 
+            data-title="Get Hint" data-action='getHint'
+            data-cell='5' data-hint="">
+            <i class="icon-bookmark"></i>
+          </a>
+        </div>
+      </div>    </form>
+  </div>
+  <div class='span7'>
+    <iframe id="knitResult5" class='shiny-html-output'></iframe>
+  </div>
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title=''>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='Functionality ui.R'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Server and Libraries'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Embedded Code'>
+         4
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=5 title='Interactive Chart'>
+         5
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  <script src="libraries/widgets/interactive/js/ace/js/ace.js"></script>
+<script src="libraries/widgets/interactive/js/opencpu-0.5.js"></script>
+<script src="libraries/widgets/interactive/js/interactive.js"></script>
+<script src="test.js"></script>
+
+  <script src="shared/shiny.js" type="text/javascript"></script>
+  <script src="shared/slider/js/jquery.slider.min.js"></script>
+  <script src="shared/bootstrap/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="shared/slider/css/jquery.slider.min.css"></link>
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>

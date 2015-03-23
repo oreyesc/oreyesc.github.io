@@ -1,32 +1,16 @@
 ---
-title       : Slidify Project
-subtitle    : Slidify & Shiny
+title       : Slidify Presentation
+subtitle    : Project with Slidify
 author      : Oscar Reyes
 job         : DS
 framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
 highlighter : highlight.js  # {highlight.js, prettify, highlight}
 hitheme     : tomorrow      # 
-widgets     : [shiny, interactive]            # {mathjax, quiz, bootstrap}
+widgets    : [bootstrap, quiz, shiny, interactive]           # {mathjax, quiz, bootstrap, slidify}
 mode        : selfcontained # {standalone, draft}
-knit        : slidify::knit2slides
 logo        : /OR.jpg
-ext_widgets : {rCharts: [libraries/nvd3]}
-runtime     : shiny
-assets      : {js: 'test.js'}
+ext_widgets: {rCharts: [libraries/nvd3]}
 ---
-
-<style>
-body {
-  background-color: #000;
-}
-.quiz-option label{
-  display: inline;
-  font-size: 1em;
-}
-ul.nav li::before { content: ""; }  
-ul.nav li{ font-size: 18px; line-height: 24px;}
-</style>
-
 
 ## Description
 
@@ -128,21 +112,19 @@ qplot(hp, mpg, data=mtcars)+geom_smooth()
 
 --- &interactive
 
-## Interactive Chart
 ```{r opts.label = 'shiny'}
 slidifyUI(
-        slidebarPanel (
-                selectInput ('sex', 'Chose Sex', c ('Male', 'Female')),
-                selectInput ('type', 'Choose Type',
-                             c ('multiBarChart', 'multiBarHorizantalChart')
-                )
-        ),
-        mainPanel (
-                
-        )
-) 
+  sidebarPanel(
+    selectInput('sex', 'Choose Sex', c('Male', 'Female')),
+    selectInput('type', 'Choose Type',
+      c('multiBarChart', 'multiBarHorizontalChart')
+    )
+  ),
+  mainPanel(
+    tags$div(id = 'nvd3plot', class='shiny-html-output nvd3 rChart')
+  )
+)
 ```
-
 
 
 

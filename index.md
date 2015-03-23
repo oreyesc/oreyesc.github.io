@@ -118,10 +118,13 @@ In the server.R are:
 
 ## Embedded Code
 
-```{r md-cars-scatter, message=FALSE, fig.width=7, fig.height=5}
+
+```r
 library(ggplot2)
 qplot(hp, mpg, data=mtcars)+geom_smooth() 
 ```
+
+![plot of chunk md-cars-scatter](assets/fig/md-cars-scatter-1.png) 
 [Shiny Application](https://sigma360.shinyapps.io/shinyproject_coursera/)
 
 
@@ -129,7 +132,8 @@ qplot(hp, mpg, data=mtcars)+geom_smooth()
 --- &interactive
 
 ## Interactive Chart
-```{r opts.label = 'shiny'}
+
+```r
 slidifyUI(
         slidebarPanel (
                 selectInput ('sex', 'Chose Sex', c ('Male', 'Female')),
@@ -141,6 +145,10 @@ slidifyUI(
                 
         )
 ) 
+```
+
+```
+## Error in eval(expr, envir, enclos): could not find function "slidifyUI"
 ```
 
 
