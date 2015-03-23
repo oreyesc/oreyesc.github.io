@@ -5,8 +5,8 @@ author      : Oscar Reyes
 job         : DS
 framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
 highlighter : highlight.js  # {highlight.js, prettify, highlight}
-hitheme     : tomorrow      # 
-widgets     : [shiny, interactive]            # {mathjax, quiz, bootstrap}
+hitheme     : tomorrow      #
+widgets     : [bootstrap, shiny, interactive] # {mathjax, quiz, bootstrap}
 mode        : selfcontained # {standalone, draft}
 knit        : slidify::knit2slides
 logo        : /OR.jpg
@@ -15,74 +15,64 @@ runtime     : shiny
 assets      : {js: 'test.js'}
 ---
 
-<style>
-body {
-  background-color: #000;
-}
-.quiz-option label{
-  display: inline;
-  font-size: 1em;
-}
-ul.nav li::before { content: ""; }  
-ul.nav li{ font-size: 18px; line-height: 24px;}
-</style>
-
-
 ## Description
 
-The application requirements:
+Application requirements:
 
 1. Some form of input (widget: textbox, radio button, checkbox, ...)
 2. Some operation on the ui input in sever.R
 3. Some reactive output displayed as a result of server calculations
 4. You must also include enough documentation so that a novice user could use your application.
-5. The documentation should be at the Shiny website itself. 
+5. The documentation should be at the Shiny website itself.
+
 
 ## Components
 
 <table>
         <tr>
-                <td><b>Component</b></td>
-                <td><b>Description</b></td>
+        <td><b>Component</b></td>
+        <td><b>Description</b></td>
         </tr>
         <tr>
-                <td>ui.R</td>
-                <td>user-interface definition of a Shiny web application.</td>
+        <td>ui.R</td>
+        <td>user-interface definition of a Shiny web application.</td>
         </tr>
         <tr>
-                <td>server.R</td>
-                <td>logic for a Shiny web application</td>
+        <td>server.R</td>
+        <td>logic for a Shiny web application</td>
         </tr>
-</table>
+        </table>
 
 
---- &twocol 
+--- &twocol
 
 ## Functionality ui.R
+
 *** =left
 In the ui.R the user has tow parts:
 
 **1. Side Bar: has the option to choose:**
 
-- **Select a dataset**: iris, mtcars or trees.
-- **Select two variables**: X and Y variables.
-- **Select density**: from 50 to 250.
-- **Select a colour** for the graphs.
-- **Select one type of graph**:
-  - Bar Plot.
-  - Box Plot.
-  - Dot Plot.
-  - Line Chart.
-  - Scatter Plot.
+  - **Select a dataset**: iris, mtcars or trees.
+  - **Select two variables**: X and Y variables.
+  - **Select density**: from 50 to 250.
+  - **Select a colour** for the graphs.
+  - **Select one type of graph**:
+    - Bar Plot.
+    - Box Plot.
+    - Dot Plot.
+    - Line Chart.
+    - Scatter Plot.
 
 *** =right
 **2. mainPanel: has a tabPanel with:**
-- **Dinamyc Plot**: shows the selected graphic created with the information of the selected dataset.
-- **Structure**: shows the selected dataset structure.
-- **Summary**: shows the selected dataset summary.
-- **Data**: shows the dataof the X variable.
+  - **Dinamyc Plot**: shows the selected graphic created with the information of the selected dataset.
+  - **Structure**: shows the selected dataset structure.
+  - **Summary**: shows the selected dataset summary.
+  - **Data**: shows the dataof the X variable.
 
---- 
+
+---
 
 ## Server and Libraries
 In the server.R are:
@@ -114,35 +104,61 @@ In the server.R are:
 
 `shiny` , `ggplot`, `car`, `RcppEigen`
 
---- .class #id 
+
+--- .class #id
 
 ## Embedded Code
 
 ```{r md-cars-scatter, message=FALSE, fig.width=7, fig.height=5}
 library(ggplot2)
-qplot(hp, mpg, data=mtcars)+geom_smooth() 
+qplot(hp, mpg, data=mtcars)+geom_smooth()
 ```
 [Shiny Application](https://sigma360.shinyapps.io/shinyproject_coursera/)
 
 
+--- .class #id
 
---- &interactive
-
-## Interactive Chart
+## Interactive Information 
 ```{r opts.label = 'shiny'}
-slidifyUI(
-        slidebarPanel (
-                selectInput ('sex', 'Chose Sex', c ('Male', 'Female')),
-                selectInput ('type', 'Choose Type',
-                             c ('multiBarChart', 'multiBarHorizantalChart')
+slidifyUI (
+        sidebarPanel (
+                selectInput ('dataset',
+                             'Choose Dataset',
+                             c ('iris', 
+                                'mtcars',
+                                'trees'
+                                )
+                ),              
+                
+                selectInput ('type',
+                             'Choose Type',
+                             c("Summary",
+                               "Structure"
+                                )
                 )
         ),
         mainPanel (
-                
+                #tags$div (id = "imageplot",
+                #          class = "shiny-html-output imageplot Chart"),
+                #tags$p ("text de prueba")
+                #tags$table(id = "sumstr", class = "classsum")
+                #tags$div (id = "sumstr", class = "shiny-html-output sumstr")
+                verbatimTextOutput ("sumstr")
         )
-) 
+)
 ```
 
 
+--- &interactive
 
-
+## Interactive Chart 
+```{r echo = F, results = 'asis'}
+require (rCharts)
+cardata <- as.data.frame (mtcars)
+printdata <- nPlot (mpg ~ hp,
+                    group = 'carb',
+                    type = 'multiBarChart',
+                    data = subset (cardata, mpg >=10)
+                   )
+printdata$print ('chart1')
+```
