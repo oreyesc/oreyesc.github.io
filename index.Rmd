@@ -82,7 +82,6 @@ slides > slide > hgroup + article {
 |  dataset | contains the selected dataset.                             |
 |   graph  | contains the selected graphic.                             |
 
-:-------:
 --- 
 
 ## Functionality ui.R
@@ -101,20 +100,22 @@ In the ui.R the user has tow parts:
   
 **2. mainPanel: has a tabPanel with:**
   - **Dinamyc Information**: shows information (summary or structure) of the selected dataset.
+
 ---
 
 ## Embedded Code
 
-```{r md-trees-scatter, message=FALSE,results='asis', fig.height=4, fig.width=6}
+```{r md-trees-scatter, message=FALSE,results='asis', fig.height=4, fig.width=6, cache=FALSE}
 library(ggplot2)
 qplot(Height, Girth, data=trees) 
 
 ```
 [Shiny Application](https://sigma360.shinyapps.io/shinyproject_coursera/)
+
 --- 
 
 ## Interactive Information 
-```{r,echo=FALSE, results='asis',size=1,dpi=1,size='small'}
+```{r,echo=FALSE, results='asis',size=1,dpi=1,size='small', cache=FALSE}
 inputPanel (
         selectInput ("dataset",
                      label = "Select Data Set:",
