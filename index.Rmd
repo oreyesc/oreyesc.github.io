@@ -1,164 +1,160 @@
 ---
-title       : Slidify Project
-subtitle    : Slidify & Shiny
-author      : Oscar Reyes
-job         : DS
+title       : "Slidify Project"
+subtitle    : "Slidify & Shiny"
+author      : "Oscar Reyes"
+job         : "DS"
 framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
-highlighter : highlight.js  # {highlight.js, prettify, highlight}
-hitheme     : tomorrow      #
+highlighter : highlight  # {highlight.js, prettify, highlight, highlight.js}
+hitheme     : solarized_light      #
 widgets     : [bootstrap, shiny, interactive] # {mathjax, quiz, bootstrap}
-mode        : selfcontained # {standalone, draft}
-knit        : slidify::knit2slides
-logo        : /OR.jpg
-ext_widgets : {rCharts: [libraries/nvd3]}
-runtime     : shiny
-assets      : {js: 'test.js'}
+mode        : selfcontained # {standalone, draft, selfcontained}
+output: ioslides_presentation
+runtime: shiny
+logo        : OR.jpg
 ---
+<style>
+slide.smallcode pre {
+  font-size: 15px;
+}
+pre {
+  font-size: 15px;
+}
+.header {
 
-## Description
+font-family: Arial, Helvetica, sans-serif;
 
-Application requirements:
+font-size: 24px;
 
-1. Some form of input (widget: textbox, radio button, checkbox, ...)
-2. Some operation on the ui input in sever.R
-3. Some reactive output displayed as a result of server calculations
-4. You must also include enough documentation so that a novice user could use your application.
-5. The documentation should be at the Shiny website itself.
+font-weight: bold;
 
+color: #FFFFFF;
 
-## Components
+background-color: #000000;
 
-<table>
-        <tr>
-        <td><b>Component</b></td>
-        <td><b>Description</b></td>
-        </tr>
-        <tr>
-        <td>ui.R</td>
-        <td>user-interface definition of a Shiny web application.</td>
-        </tr>
-        <tr>
-        <td>server.R</td>
-        <td>logic for a Shiny web application</td>
-        </tr>
-        </table>
+background-position: center top;
 
+height: 50px;
 
---- &twocol
+width: auto;
+
+text-align: center;
+
+}
+
+.body {
+
+font-family: Arial, Helvetica, sans-serif;
+
+font-size: 14px;
+
+background-color: #000000;
+
+float: none;
+
+height: 107px;
+
+width: 630px;
+
+line-height: 25px;
+
+margin-right: 126px;
+
+}
+/* Fonts and Spacing */
+article p, article li, article li.build, section p, section li{
+  font-family: 'Open Sans','Helvetica', 'Crimson Text', 'Garamond',  'Palatino', sans-serif;
+  text-align: justify;
+  font-size:22px;
+  line-height: 1.5em;
+  color: #AA7139;
+}
+/* Reduce Space between Title and Body */
+slides > slide > hgroup + article {
+  margin-top: 15px;
+}
+</style>
+## Server
+
+| Variable |                        Functionality                       |
+| :------: | :--------------------------------------------------------: |
+|   colm   | contains the value of selected dataset.                    |
+|   var    | contains the names of the columns of the selected dataset. |
+|  dataset | contains the selected dataset.                             |
+|   graph  | contains the selected graphic.                             |
+
+:-------:
+--- 
 
 ## Functionality ui.R
 
-*** =left
 In the ui.R the user has tow parts:
 
 **1. Side Bar: has the option to choose:**
 
   - **Select a dataset**: iris, mtcars or trees.
-  - **Select two variables**: X and Y variables.
+  
   - **Select density**: from 50 to 250.
+  
   - **Select a colour** for the graphs.
-  - **Select one type of graph**:
-    - Bar Plot.
-    - Box Plot.
-    - Dot Plot.
-    - Line Chart.
-    - Scatter Plot.
-
-*** =right
+  
+  - **Select one type of graph**: Bar Plot, Box Plot, Dot Plot, Line Chart, Scatter Plot.
+  
 **2. mainPanel: has a tabPanel with:**
-  - **Dinamyc Plot**: shows the selected graphic created with the information of the selected dataset.
-  - **Structure**: shows the selected dataset structure.
-  - **Summary**: shows the selected dataset summary.
-  - **Data**: shows the dataof the X variable.
-
-
+  - **Dinamyc Information**: shows information (summary or structure) of the selected dataset.
 ---
-
-## Server and Libraries
-In the server.R are:
-
-<table>
-        <tr>
-                <td>**Variable**</td>
-                <td>**Functionality**</td>
-        </tr>
-        <tr>
-                <td>colm</td>
-                <td>contains the value of selected dataset</td>
-        </tr>
-        <tr>
-                <td>var</td>
-                <td>contains the names of the columns of the selected dataset.</td>
-        </tr>
-        <tr>
-                <td>dataset</td>
-                <td>contains the selected dataset.</td>
-        </tr>
-        <tr>
-                <td>graph</td>
-                <td>contains the selected graphic.</td>
-        </tr>
-</table>
-
-### Libraries:
-
-`shiny` , `ggplot`, `car`, `RcppEigen`
-
-
---- .class #id
 
 ## Embedded Code
 
-```{r md-cars-scatter, message=FALSE, fig.width=7, fig.height=5}
+```{r md-trees-scatter, message=FALSE,results='asis', fig.height=4, fig.width=6}
 library(ggplot2)
-qplot(hp, mpg, data=mtcars)+geom_smooth()
+qplot(Height, Girth, data=trees) 
+
 ```
 [Shiny Application](https://sigma360.shinyapps.io/shinyproject_coursera/)
-
-
---- .class #id
+--- 
 
 ## Interactive Information 
-```{r opts.label = 'shiny'}
-slidifyUI (
-        sidebarPanel (
-                selectInput ('dataset',
-                             'Choose Dataset',
-                             c ('iris', 
-                                'mtcars',
-                                'trees'
-                                )
-                ),              
-                
-                selectInput ('type',
-                             'Choose Type',
-                             c("Summary",
-                               "Structure"
-                                )
-                )
+```{r,echo=FALSE, results='asis',size=1,dpi=1,size='small'}
+inputPanel (
+        selectInput ("dataset",
+                     label = "Select Data Set:",
+                     choices = c ("mtcars",
+                                  "trees",
+                                  "iris"),
+                     selected = "mtcars"
         ),
-        mainPanel (
-                #tags$div (id = "imageplot",
-                #          class = "shiny-html-output imageplot Chart"),
-                #tags$p ("text de prueba")
-                #tags$table(id = "sumstr", class = "classsum")
-                #tags$div (id = "sumstr", class = "shiny-html-output sumstr")
-                verbatimTextOutput ("sumstr")
-        )
+        
+        selectInput ("variable",
+                     label = "Option: ",
+                     choices = c ("Structure",
+                                  "Summary","names"),
+                     selected = "Structure"
+        )        
 )
-```
 
-
---- &interactive
-
-## Interactive Chart 
-```{r echo = F, results = 'asis'}
-require (rCharts)
-cardata <- as.data.frame (mtcars)
-printdata <- nPlot (mpg ~ hp,
-                    group = 'carb',
-                    type = 'multiBarChart',
-                    data = subset (cardata, mpg >=10)
-                   )
-printdata$print ('chart1')
+renderPrint ({
+        if (input$dataset == "mtcars") {
+                datainfo <- as.data.frame (mtcars)
+        }
+        else {
+                if (input$dataset == "trees") {
+                        datainfo <- as.data.frame (trees)
+                }
+                else {
+                        datainfo <- as.data.frame (iris)
+                }
+        }
+        
+        if (input$variable == "Structure") {
+                str (datainfo)
+        }
+        else {
+                if (input$variable == "Summary") {
+                        summary (datainfo)
+                }
+                else {
+                        names(datainfo)
+                }
+        }        
+})
 ```

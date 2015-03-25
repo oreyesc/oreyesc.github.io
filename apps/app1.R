@@ -1,4 +1,11 @@
 require (rCharts)
+require (car)
+require (ggplot2)
+require (RcppEigen)
+require (shiny)
+require (shinyapps)
+require (slidify)
+require (slidifyLibraries)
 
 datainfo <- reactive ({
         switch (input$dataset,
