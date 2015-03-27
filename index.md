@@ -6,81 +6,25 @@ job         : "DS"
 framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
 highlighter : highlight  # {highlight.js, prettify, highlight, highlight.js}
 hitheme     : solarized_light      #
-widgets     : [bootstrap, shiny, interactive] # {mathjax, quiz, bootstrap}
+widgets     : [shiny] # {mathjax, quiz, bootstrap}
 mode        : selfcontained # {standalone, draft, selfcontained}
 output: ioslides_presentation
+copy_libraries: true
 runtime: shiny
 logo        : OR.jpg
 ---
-<style>
-slide.smallcode pre {
-  font-size: 15px;
-}
-pre {
-  font-size: 15px;
-}
-.header {
 
-font-family: Arial, Helvetica, sans-serif;
 
-font-size: 24px;
-
-font-weight: bold;
-
-color: #FFFFFF;
-
-background-color: #000000;
-
-background-position: center top;
-
-height: 50px;
-
-width: auto;
-
-text-align: center;
-
-}
-
-.body {
-
-font-family: Arial, Helvetica, sans-serif;
-
-font-size: 14px;
-
-background-color: #000000;
-
-float: none;
-
-height: 107px;
-
-width: 630px;
-
-line-height: 25px;
-
-margin-right: 126px;
-
-}
-/* Fonts and Spacing */
-article p, article li, article li.build, section p, section li{
-  font-family: 'Open Sans','Helvetica', 'Crimson Text', 'Garamond',  'Palatino', sans-serif;
-  text-align: justify;
-  font-size:22px;
-  line-height: 1.5em;
-  color: #AA7139;
-}
-/* Reduce Space between Title and Body */
-slides > slide > hgroup + article {
-  margin-top: 15px;
-}
-</style>
 ## Server
 
-| Variable |                        Functionality                       |
-| :------: | :--------------------------------------------------------: |
-|   colm   | contains the value of selected dataset.                    |
-|   var    | contains the names of the columns of the selected dataset. |
-|  dataset | contains the selected dataset.                             |
-|   graph  | contains the selected graphic.                             |
+**_Variables & Description_**
+
+**colm**   : contains the value of selected dataset.                   
+**var**    : contains the names of the columns of the selected dataset.   
+**dataset**: contains the selected dataset.                             
+**graph**  : contains the selected graphic.                            
+
+[Readme File](https://github.com/oreyesc/oreyesc.github.io/blob/master/README.md)
 
 --- 
 
@@ -105,41 +49,35 @@ In the ui.R the user has tow parts:
 
 ## Embedded Code
 
-
-```r
-library(ggplot2)
-qplot(Height, Girth, data=trees) 
-```
-
-![plot of chunk md-trees-scatter](assets/fig/md-trees-scatter-1.png) 
+![plot of chunk unnamed-chunk-1](assets/fig/unnamed-chunk-1-1.png) 
 [Shiny Application](https://sigma360.shinyapps.io/shinyproject_coursera/)
 
 --- 
 
 ## Interactive Information 
-<!--html_preserve--><div class="shiny-input-panel">
-<div class="shiny-flow-layout">
-<div>
-<div class="form-group shiny-input-container">
-<label class="control-label" for="dataset">Select Data Set:</label>
-<div>
-<select id="dataset"><option value="mtcars" selected>mtcars</option>
-<option value="trees">trees</option>
-<option value="iris">iris</option></select>
-<script type="application/json" data-for="dataset" data-nonempty="">{}</script>
+<div class="row-fluid">
+  <div class="col-sm-4">
+    <form class="well">
+      <div class="form-group shiny-input-container">
+        <label class="control-label" for="dataset">Choose Dataset</label>
+        <div>
+          <select id="dataset"><option value="iris" selected>iris</option>
+<option value="mtcars">mtcars</option>
+<option value="trees">trees</option></select>
+          <script type="application/json" data-for="dataset" data-nonempty="">{}</script>
+        </div>
+      </div>
+      <div class="form-group shiny-input-container">
+        <label class="control-label" for="type">Choose Type</label>
+        <div>
+          <select id="type"><option value="Summary" selected>Summary</option>
+<option value="Structure">Structure</option></select>
+          <script type="application/json" data-for="type" data-nonempty="">{}</script>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="col-sm-8">
+    <pre id="sumstr" class="shiny-text-output"></pre>
+  </div>
 </div>
-</div>
-</div>
-<div>
-<div class="form-group shiny-input-container">
-<label class="control-label" for="variable">Option: </label>
-<div>
-<select id="variable"><option value="Structure" selected>Structure</option>
-<option value="Summary">Summary</option>
-<option value="names">names</option></select>
-<script type="application/json" data-for="variable" data-nonempty="">{}</script>
-</div>
-</div>
-</div>
-</div>
-</div><!--/html_preserve--><!--html_preserve--><pre id="outb240a1445b56e364" class="shiny-text-output"></pre><!--/html_preserve-->

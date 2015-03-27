@@ -6,81 +6,25 @@ job         : "DS"
 framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
 highlighter : highlight  # {highlight.js, prettify, highlight, highlight.js}
 hitheme     : solarized_light      #
-widgets     : [bootstrap, shiny, interactive] # {mathjax, quiz, bootstrap}
+widgets     : [shiny] # {mathjax, quiz, bootstrap}
 mode        : selfcontained # {standalone, draft, selfcontained}
 output: ioslides_presentation
+copy_libraries: true
 runtime: shiny
 logo        : OR.jpg
 ---
-<style>
-slide.smallcode pre {
-  font-size: 15px;
-}
-pre {
-  font-size: 15px;
-}
-.header {
+`r opts_chunk$set (echo = FALSE, message = FALSE, comment = "")`
 
-font-family: Arial, Helvetica, sans-serif;
-
-font-size: 24px;
-
-font-weight: bold;
-
-color: #FFFFFF;
-
-background-color: #000000;
-
-background-position: center top;
-
-height: 50px;
-
-width: auto;
-
-text-align: center;
-
-}
-
-.body {
-
-font-family: Arial, Helvetica, sans-serif;
-
-font-size: 14px;
-
-background-color: #000000;
-
-float: none;
-
-height: 107px;
-
-width: 630px;
-
-line-height: 25px;
-
-margin-right: 126px;
-
-}
-/* Fonts and Spacing */
-article p, article li, article li.build, section p, section li{
-  font-family: 'Open Sans','Helvetica', 'Crimson Text', 'Garamond',  'Palatino', sans-serif;
-  text-align: justify;
-  font-size:22px;
-  line-height: 1.5em;
-  color: #AA7139;
-}
-/* Reduce Space between Title and Body */
-slides > slide > hgroup + article {
-  margin-top: 15px;
-}
-</style>
 ## Server
 
-| Variable |                        Functionality                       |
-| :------: | :--------------------------------------------------------: |
-|   colm   | contains the value of selected dataset.                    |
-|   var    | contains the names of the columns of the selected dataset. |
-|  dataset | contains the selected dataset.                             |
-|   graph  | contains the selected graphic.                             |
+**_Variables & Description_**
+
+**colm**   : contains the value of selected dataset.                   
+**var**    : contains the names of the columns of the selected dataset.   
+**dataset**: contains the selected dataset.                             
+**graph**  : contains the selected graphic.                            
+
+[Readme File](https://github.com/oreyesc/oreyesc.github.io/blob/master/README.md)
 
 --- 
 
@@ -105,7 +49,7 @@ In the ui.R the user has tow parts:
 
 ## Embedded Code
 
-```{r md-trees-scatter, message=FALSE,results='asis', fig.height=4, fig.width=6, cache=FALSE}
+```{r, echo=FALSE, cache=FALSE, message=FALSE, results='asis', fig.height=5, fig.width=7}
 library(ggplot2)
 qplot(Height, Girth, data=trees) 
 
@@ -115,47 +59,75 @@ qplot(Height, Girth, data=trees)
 --- 
 
 ## Interactive Information 
-```{r,echo=FALSE, results='asis',size=1,dpi=1,size='small', cache=FALSE}
-inputPanel (
-        selectInput ("dataset",
-                     label = "Select Data Set:",
-                     choices = c ("mtcars",
-                                  "trees",
-                                  "iris"),
-                     selected = "mtcars"
+```{r, echo=FALSE, cache=FALSE, message=FALSE, results='asis'}
+slidifyUI (
+        sidebarPanel (
+                selectInput ('dataset',
+                             'Choose Dataset',
+                             c ('iris', 
+                                'mtcars',
+                                'trees'
+                                )
+                ),              
+                
+                selectInput ('type',
+                             'Choose Type',
+                             c("Summary",
+                               "Structure"
+                                )
+                )
         ),
-        
-        selectInput ("variable",
-                     label = "Option: ",
-                     choices = c ("Structure",
-                                  "Summary","names"),
-                     selected = "Structure"
-        )        
+        mainPanel (
+                #tags$div (id = "imageplot",
+                #          class = "shiny-html-output imageplot Chart"),
+                #tags$p ("text de prueba")
+                #tags$table(id = "sumstr", class = "classsum")
+                #tags$div (id = "sumstr", class = "shiny-html-output sumstr")
+                verbatimTextOutput ("sumstr")
+        )
 )
+#inputPanel (
+#        selectInput ("dataset",
+#                     label = "Select Data Set:",
+#                     choices = c ("mtcars",
+#                                  "trees",
+#                                  "iris"),
+#                     selected = "mtcars"
+#        ),
+#                
+#        selectInput ("variable",
+#                     label = "Option: ",
+#             choices = c ("Structure",
+#                  "Summary","names"),
+#             selected = "Structure"
+#        ),
+#        uiOutput ('a')
+#)
 
-renderPrint ({
-        if (input$dataset == "mtcars") {
-                datainfo <- as.data.frame (mtcars)
-        }
-        else {
-                if (input$dataset == "trees") {
-                        datainfo <- as.data.frame (trees)
-                }
-                else {
-                        datainfo <- as.data.frame (iris)
-                }
-        }
-        
-        if (input$variable == "Structure") {
-                str (datainfo)
-        }
-        else {
-                if (input$variable == "Summary") {
-                        summary (datainfo)
-                }
-                else {
-                        names(datainfo)
-                }
-        }        
-})
+#renderDataTable ({
+#if (input$dataset == "mtcars") {
+#        datainfo <- as.data.frame (mtcars)
+#}
+#else {
+#        if (input$dataset == "trees") {
+#                datainfo <- as.data.frame (trees)
+#        }
+#        else {
+#                datainfo <- as.data.frame (iris)
+#        }
+#}
+                
+#if (input$variable == "Structure") {
+#        output <- str (datainfo)
+#}
+#else {
+#        if (input$variable == "Summary") {
+#                output <- summary (datainfo)
+#        }
+#        else {
+#                output <- names(datainfo)
+#        }
+#}        
+#})
+
 ```
